@@ -44,7 +44,7 @@ Point Dimensions() {
 #elif __linux__
 #include <unistd.h> // console stuff
 #include <termios.h> // getch();
-##elif __APPLE__ // or __MACH__
+#elif __APPLE__ // or __MACH__
 #include <curses.h> // getch();
 #endif
 
