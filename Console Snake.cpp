@@ -42,8 +42,19 @@ Point Dimensions() {
 	return Point(csbi.srWindow.Right - csbi.srWindow.Left + 1, csbi.srWindow.Bottom - csbi.srWindow.Top + 1);
 }
 #elif __linux__
-#include <unistd.h> // console stuff
-#include <termios.h> // getch();
+// these two enable recreating getch();
+#include <unistd.h>
+#include <termios.h>
+int getch(void) {
+	struct termios oldattr, newattr;
+	tcgetattr(STDIN_FILENO, &oldattr);
+	newattr = oldattr;
+	newattr.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
+	int ch = getchar();
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
+	return ch;
+}
 #elif __APPLE__ // or __MACH__
 #include <curses.h> // getch();
 #endif
