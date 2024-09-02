@@ -1,1 +1,0 @@
-C:\Dev\C++\Console Snake\x64\Release\Console Snake.exe
