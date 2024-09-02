@@ -12,9 +12,6 @@ public:
 };
 
 // platform compatibility
-void sleep(int milliseconds) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
-}
 #ifdef _WIN32
 #include <Windows.h> // console stuff
 #include <conio.h> // _getch();
@@ -42,19 +39,19 @@ Point Dimensions() {
 	return Point(csbi.srWindow.Right - csbi.srWindow.Left + 1, csbi.srWindow.Bottom - csbi.srWindow.Top + 1);
 }
 #elif __linux__
-// these two enable recreating getch();
-#include <unistd.h>
+#include <unistd.h> // console stuff
 #include <termios.h>
-int getch(void) {
-	struct termios oldattr, newattr;
-	tcgetattr(STDIN_FILENO, &oldattr);
-	newattr = oldattr;
-	newattr.c_lflag &= ~(ICANON | ECHO);
-	tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
-	int ch = getchar();
-	tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
-	return ch;
-}
+int getch() 
+{
+		struct termios oldattr, newattr;
+		tcgetattr(STDIN_FILENO, &oldattr);
+		newattr = oldattr;
+		newattr.c_lflag &= ~(ICANON | ECHO);
+		tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
+		int ch = getchar();
+		tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
+		return ch;
+} 
 #elif __APPLE__ // or __MACH__
 #include <curses.h> // getch();
 #endif
@@ -75,6 +72,10 @@ Point Dimensions() {
 	return Point((int)(ws.ws_col), (int)(ws.ws_row));
 }
 #endif
+// platform unlocked sleep
+void sleep(int milliseconds) {
+	std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+}
 
 // might need to look into Linux versions :shrug:
 #define ARROW_UP 72
@@ -167,7 +168,7 @@ int main()
 	std::vector<Point> snake = { Point(half_width / 2, half_height) };
 	Point apple(half_width + half_width / 2, half_height);
 	int score = 0;
-	
+
 	std::thread input_thread = std::thread(input_loop);
 
 	while (true) {
@@ -210,7 +211,7 @@ int main()
 		}
 
 		// UPDATE
-		
+
 		// move the snake body
 		for (int i = score; i > 0; i--) {
 			snake[i] = snake[i - 1];
@@ -229,6 +230,8 @@ int main()
 			break;
 		case RIGHT:
 			snake[0].x++;
+			break;
+		default:
 			break;
 		}
 		// snake dies if it goes out of bounds
@@ -257,6 +260,7 @@ int main()
 		}
 
 		// RENDER
+
 		// move the cursor to the start (instead of clearing)
 		RepositionCursor();
 		// print score
@@ -270,7 +274,7 @@ int main()
 				else if (snake[0].x == x && snake[0].y == y) {
 					std::cout << "O";
 				} else {
-					// yeah this part is pretty bad :shrug: but it works...
+					// yeah this part is pretty slow :shrug: but it works...
 					bool was_snake = false;
 					for (int i = 1; i <= score; i++) {
 						if (snake[i].x == x && snake[i].y == y) {
