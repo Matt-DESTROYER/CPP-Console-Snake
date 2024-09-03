@@ -11,6 +11,8 @@ if [[ $RUNNER_OS == "Linux" ]]; then
 	make
 elif [[ $RUNNER_OS == "Windows" ]]; then
 	msbuild ./$PROJECT_NAME.sln /property:Configuration=Debug
+	# just in case
+	git pull
 else
 	echo "Unsupported OS: $RUNNER_OS"
 	exit 1
@@ -36,6 +38,4 @@ mkdir -p ../build/$RUNNER_OS-$ARCH/
 
 # clean up temporary directory
 cd ../
-if [[ $RUNNER_OS == "Linux" ]]; then
-	rm -r -f ./temp
-fi
+rm -r -f ./temp
