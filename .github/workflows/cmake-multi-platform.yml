@@ -37,7 +37,7 @@ jobs:
 
     - if: runner.os == 'Windows'
       run: |
-        export DEVENV=$(vswhere -latest -prerelease -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
+        $DEVENV:vswhere -latest -prerelease -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
 
     - name: Build
       run: bash ./src/build.sh
