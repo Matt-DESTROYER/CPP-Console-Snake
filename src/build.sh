@@ -8,7 +8,8 @@ cmake --build ./
 make
 
 # copy the executable to the build directory
-cp ./main ../build
+[[ -e ./main ]] && cp ./main ../build
+[[ -e ./main.exe ]] && cp ./main.exe ../build
 
 # clean up temporary directory
 cd ../
