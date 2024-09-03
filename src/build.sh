@@ -9,6 +9,7 @@ cd ./temp
 # build the project
 cmake ../src
 cmake --build ./
+echo $OSTYPE
 if [[ $OSTYPE == "linux-gnu" ]]; then
 	make
 else
