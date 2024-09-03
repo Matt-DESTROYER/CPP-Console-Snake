@@ -12,8 +12,8 @@ cmake --build ./
 if [[ $OSTYPE == "linux-gnu" ]]; then
 	make
 else
-	devenv=& vswhere.exe '-property' productPath
-	$devenv $PROJECT_NAME.sln
+	devenv=vswhere '-property' productPath
+	&devenv $PROJECT_NAME.sln
 fi
 
 # detect architecture
