@@ -10,8 +10,8 @@ cmake --build ./
 make
 
 # copy the executable to the build directory
-[[ -f ./main ]] && cp ./main ../build
-[[ -f ./main.exe ]] && cp ./main.exe ../build
+[[ -f ./main ]] && cp -f ./main ../build
+[[ -f ./main.exe ]] && cp -f ./main.exe ../build
 
 # clean up temporary directory
 cd ../
