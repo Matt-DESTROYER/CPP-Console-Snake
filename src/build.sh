@@ -12,8 +12,7 @@ cmake --build ./
 if [[ $OSTYPE == "linux-gnu" ]]; then
 	make
 else
-	devenv=vswhere '-property' productPath
-	&devenv $PROJECT_NAME.sln
+	eval $(vswhere '-property' productPath $PROJECT_NAME.sln)
 fi
 
 # detect architecture
@@ -27,6 +26,9 @@ elif [[ $arch == arm* ]]; then
 fi
 
 # copy the executable to the build directory
+if [ -d ../build/$OSTYPE-$ARCH/ ]; then
+	rm -r -f ../build/$OSTYPE-$ARCH/
+fi
 mkdir -p ../build/$OSTYPE-$ARCH/
 [[ -f ./main ]] && cp -f ./main ../build/$OSTYPE-$ARCH/
 [[ -f ./main.exe ]] && cp -f ./main.exe ../build/$OSTYPE-$ARCH/
