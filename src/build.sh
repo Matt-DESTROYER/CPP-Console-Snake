@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PROJECT_NAME="CPP-Console-Snake"
+
 # create a temporary directory
 mkdir ./temp
 cd ./temp
@@ -10,8 +12,8 @@ cmake --build ./
 if [[ $OSTYPE == "linux-gnu" ]]; then
 	make
 else
-	$devenv = & vswhere.exe '-property' productPath
-	$devenv /build
+	devenv=& vswhere.exe '-property' productPath
+	$devenv $PROJECT_NAME.sln
 fi
 
 # detect architecture
