@@ -1,12 +1,6 @@
-# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
-# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
 name: CMake on multiple platforms
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -51,18 +45,21 @@ jobs:
     - name: Build
       run: sh ./src/build.sh
 
-    - name: Push changes
-      if: steps.commit.outputs.push == 'true'
+    - name: Commit changes
+      id: commit
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "github-actions"
         git add --all
         if [-z "$(git status --porcelain)"]; then
-          echo "::set-output name=push::false"
+           echo "::set-output name=push::false"
         else
-          git commit -m "Add changes" -a
-          echo "::set-output name=push::true"
+           git commit -m "Add changes" -a
+           echo "::set-output name=push::true"
         fi
-        
+      shell: bash
+    - name: Push changes
+      if: steps.commit.outputs.push == 'true'
+      uses: ad-m/github-push-action@master
       with:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         github_token: ${{ secrets.GITHUB_TOKEN }}
