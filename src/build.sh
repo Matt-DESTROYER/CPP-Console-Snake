@@ -12,6 +12,7 @@ fi
 
 # create a build directory (if it doesn't exist)
 mkdir -p ../build/$OSTYPE-$ARCH/
+cd ../build/$OSTYPE-$ARCH/
 
 # build the project
 cmake ../src
