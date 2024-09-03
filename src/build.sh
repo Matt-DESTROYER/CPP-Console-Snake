@@ -10,7 +10,7 @@ cmake --build ./
 if [[ $RUNNER_OS == "Linux" ]]; then
 	make
 elif [[ $RUNNER_OS == "Windows" ]]; then
-	eval "$MSBUILD ./$PROJECT_NAME.sln \"/property:Configuration=Release\""
+	msbuild ./$PROJECT_NAME.sln /property:Configuration=Release
 else
 	echo "Unsupported OS: $RUNNER_OS"
 	exit 1

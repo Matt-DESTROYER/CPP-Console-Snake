@@ -36,8 +36,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - if: runner.os == 'Windows'
-      run: |
-        $ENV:MSBUILD = vswhere -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
+      uses: microsoft/setup-msbuild@v2
 
     - name: Build
       run: bash ./src/build.sh
