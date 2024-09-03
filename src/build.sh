@@ -24,6 +24,9 @@ mkdir -p ../build/$OSTYPE-$arch/
 [[ -f ./main ]] && cp -f ./main ../build/$OSTYPE-$arch/
 [[ -f ./main.exe ]] && cp -f ./main.exe ../build/$OSTYPE-$arch/
 
+echo $(ls ../build)
+echo $(ls ../build/$OSTYPE-$arch)
+
 # clean up temporary directory
 cd ../
 rm -r -f ./temp
