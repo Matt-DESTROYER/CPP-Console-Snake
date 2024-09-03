@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # create a temporary directory
 mkdir ./temp
 cd ./temp
