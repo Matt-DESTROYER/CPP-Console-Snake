@@ -16,7 +16,7 @@ if [[ $OSTYPE == "linux-gnu" ]]; then
 else
 	echo "calling msbuild"
 	devenv=vswhere -latest -prerelease -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
-	eval("$devenv ./$PROJECT_NAME.sln /property:Configuration=Release")
+	eval "$devenv ./$PROJECT_NAME.sln /property:Configuration=Release"
 fi
 
 # detect architecture
