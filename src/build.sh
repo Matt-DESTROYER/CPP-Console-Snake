@@ -12,7 +12,8 @@ cmake --build ./
 if [[ $OSTYPE == "linux-gnu" ]]; then
 	make
 else
-	eval $(vswhere '-property' productPath $PROJECT_NAME.sln)
+	devenv=vswhere '-property' productPath
+	eval "$devenv $PROJECT_NAME.sln"
 fi
 
 # detect architecture
