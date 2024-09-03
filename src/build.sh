@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# create a temporary directory
+mkdir ./temp
+cd ./temp
+
+# build the project
+cmake ../src
+cmake --build ./
+if [[ $OSTYPE == "linux-gnu" ]]; then
+	make
+else
+	devenv.exe /build
+fi
+
 # detect architecture
 ARCH=$(uname -m)
 if [[ $ARCH == x86_64* ]]; then
@@ -10,11 +23,11 @@ elif [[ $arch == arm* ]]; then
 	ARCH="arm"
 fi
 
-# create a build directory (if it doesn't exist)
-mkdir -p ./build/$OSTYPE-$ARCH/
-cd ./build/$OSTYPE-$ARCH/
+# copy the executable to the build directory
+mkdir -p ../build/$OSTYPE-$ARCH/
+[[ -f ./main ]] && cp -f ./main ../build/$OSTYPE-$ARCH/
+[[ -f ./main.exe ]] && cp -f ./main.exe ../build/$OSTYPE-$ARCH/
 
-# build the project
-cmake ../../src
-cmake --build ./
-make
+# clean up temporary directory
+cd ../
+rm -r -f ./temp
