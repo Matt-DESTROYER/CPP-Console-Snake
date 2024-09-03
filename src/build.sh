@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PROJECT_NAME="CPP-Console-Snake"
-
 # create a temporary directory
 mkdir ./temp
 cd ./temp
@@ -9,14 +7,13 @@ cd ./temp
 # build the project
 cmake ../src
 cmake --build ./
-echo $OSTYPE
-if [[ $OSTYPE == "linux-gnu" ]]; then
-	echo "calling make"
+if [[ $RUNNER_OS == "Linux" ]]; then
 	make
-else
-	echo "calling msbuild"
-	devenv=vswhere -latest -prerelease -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
+elif [[ $RUNNER_OS == "Windows" ]]; then
 	eval "$devenv ./$PROJECT_NAME.sln /property:Configuration=Release"
+else
+	echo "Unsupported OS: $RUNNER_OS"
+	exit 1
 fi
 
 # detect architecture
@@ -30,13 +27,13 @@ elif [[ $arch == arm* ]]; then
 fi
 
 # copy the executable to the build directory
-if [ -d ../build/$OSTYPE-$ARCH/ ]; then
-	rm -r -f ../build/$OSTYPE-$ARCH/
+if [ -d ../build/$RUNNER_OS-$ARCH/ ]; then
+	rm -r -f ../build/$RUNNER_OS-$ARCH/
 fi
-mkdir -p ../build/$OSTYPE-$ARCH/
-[[ -f ./$PROJECT_NAME ]] && cp -f ./main ../build/$OSTYPE-$ARCH/
-[[ -f ./Release/main.exe ]] && cp -f ./Release/main.exe ../build/$OSTYPE-$ARCH/$PROJECT_NAME.exe
+mkdir -p ../build/$RUNNER_OS-$ARCH/
+[[ -f ./$PROJECT_NAME ]] && cp -f ./main ../build/$RUNNER_OS-$ARCH/
+[[ -f ./Release/main.exe ]] && cp -f ./Release/main.exe ../build/$RUNNER_OS-$ARCH/$PROJECT_NAME.exe
 
 # clean up temporary directory
 cd ../
-#rm -r -f ./temp
+rm -r -f ./temp

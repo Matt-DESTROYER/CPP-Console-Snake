@@ -1,3 +1,0 @@
-/home/runner/work/CPP-Console-Snake/CPP-Console-Snake/temp/CMakeFiles/main.dir
-/home/runner/work/CPP-Console-Snake/CPP-Console-Snake/temp/CMakeFiles/edit_cache.dir
-/home/runner/work/CPP-Console-Snake/CPP-Console-Snake/temp/CMakeFiles/rebuild_cache.dir
