@@ -12,8 +12,8 @@ cmake --build ./
 if [[ $OSTYPE == "linux-gnu" ]]; then
 	make
 else
-	devenv=vswhere '-property' productPath
-	echo $devenv
+	devenv=vswhere -latest -prerelease -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
+	eval($devenv ./$PROJECT_NAME.sln /property:Configuration=Release)
 fi
 
 # detect architecture
@@ -31,9 +31,9 @@ if [ -d ../build/$OSTYPE-$ARCH/ ]; then
 	rm -r -f ../build/$OSTYPE-$ARCH/
 fi
 mkdir -p ../build/$OSTYPE-$ARCH/
-[[ -f ./main ]] && cp -f ./main ../build/$OSTYPE-$ARCH/
-[[ -f ./main.exe ]] && cp -f ./main.exe ../build/$OSTYPE-$ARCH/
+[[ -f ./$PROJECT_NAME ]] && cp -f ./main ../build/$OSTYPE-$ARCH/
+[[ -f ./Release/main.exe ]] && cp -f ./Release/main.exe ../build/$OSTYPE-$ARCH/$PROJECT_NAME.exe
 
 # clean up temporary directory
 cd ../
-rm -r -f ./temp
+#rm -r -f ./temp
