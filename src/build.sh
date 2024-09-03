@@ -11,8 +11,10 @@ cmake ../src
 cmake --build ./
 echo $OSTYPE
 if [[ $OSTYPE == "linux-gnu" ]]; then
+	echo "calling make"
 	make
 else
+	echo "calling msbuild"
 	devenv=vswhere -latest -prerelease -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe
 	eval("$devenv ./$PROJECT_NAME.sln /property:Configuration=Release")
 fi
