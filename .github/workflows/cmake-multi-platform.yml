@@ -48,6 +48,9 @@ jobs:
     - name: Commit changes
       id: commit
       run: |
+        cd ./build
+        ls
+        cd ../
         git config --local user.email "action@github.com"
         git config --local user.name "github-actions"
         git add --all
