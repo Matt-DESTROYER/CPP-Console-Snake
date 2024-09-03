@@ -15,6 +15,6 @@ mkdir -p ../build/$OSTYPE-$ARCH/
 cd ../build/$OSTYPE-$ARCH/
 
 # build the project
-cmake ../src
+cmake ../../src
 cmake --build ./
 make
