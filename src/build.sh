@@ -13,7 +13,7 @@ if [[ $OSTYPE == "linux-gnu" ]]; then
 	make
 else
 	devenv=vswhere '-property' productPath
-	eval "$devenv $PROJECT_NAME.sln"
+	echo $devenv
 fi
 
 # detect architecture
