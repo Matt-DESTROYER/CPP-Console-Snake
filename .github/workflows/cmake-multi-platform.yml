@@ -53,7 +53,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "github-actions"
         git add --all
-        git commit -m "Build" -a
+        git commit -m "Build output" -a
         git pull
         git push origin main
       shell: bash
