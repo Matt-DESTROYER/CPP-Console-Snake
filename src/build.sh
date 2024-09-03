@@ -30,8 +30,10 @@ fi
 if [ -d ../build/$RUNNER_OS-$ARCH/ ]; then
 	rm -r -f ../build/$RUNNER_OS-$ARCH/
 fi
-echo $(ls ../build)
 echo $(ls)
+echo $(ls ./x64)
+echo $(ls ./x64/Release)
+echo $(ls ./Release)
 mkdir -p ../build/$RUNNER_OS-$ARCH/
 [[ -f ./main ]] && cp -f ./main ../build/$RUNNER_OS-$ARCH/$PROJECT_NAME
 [[ -f ./Release/main.exe ]] && cp -f ./Release/main.exe ../build/$RUNNER_OS-$ARCH/$PROJECT_NAME.exe
