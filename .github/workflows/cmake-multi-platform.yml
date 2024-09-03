@@ -56,3 +56,5 @@ jobs:
         git commit -m "Build" -a
         git push origin main
       shell: bash
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
