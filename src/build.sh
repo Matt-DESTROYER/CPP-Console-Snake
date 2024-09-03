@@ -10,7 +10,7 @@ cmake --build ./
 if [[ $RUNNER_OS == "Linux" ]]; then
 	make
 elif [[ $RUNNER_OS == "Windows" ]]; then
-	msbuild ./$PROJECT_NAME.sln /property:Configuration=Release
+	msbuild ./$PROJECT_NAME.sln /property:Configuration=Debug
 else
 	echo "Unsupported OS: $RUNNER_OS"
 	exit 1
@@ -32,7 +32,7 @@ if [ -d ../build/$RUNNER_OS-$ARCH/ ]; then
 fi
 mkdir -p ../build/$RUNNER_OS-$ARCH/
 [[ -f ./main ]] && cp -f ./main ../build/$RUNNER_OS-$ARCH/$PROJECT_NAME
-[[ -f ./Release/main.exe ]] && cp -f ./Release/main.exe ../build/$RUNNER_OS-$ARCH/$PROJECT_NAME.exe
+[[ -f ./Debug/main.exe ]] && cp -f ./Debug/main.exe ../build/$RUNNER_OS-$ARCH/$PROJECT_NAME.exe
 
 # clean up temporary directory
 cd ../
