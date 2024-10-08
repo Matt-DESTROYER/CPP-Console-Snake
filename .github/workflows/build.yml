@@ -16,27 +16,13 @@ jobs:
       max-parallel: 1
 
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        build_type: [Release]
-        c_compiler: [gcc, cl]
-        include:
-          - os: windows-latest
-            c_compiler: cl
-            cpp_compiler: cl
-          - os: ubuntu-latest
-            c_compiler: gcc
-            cpp_compiler: g++
-        exclude:
-          - os: windows-latest
-            c_compiler: gcc
-          - os: ubuntu-latest
-            c_compiler: cl
+        os: [windows-latest, ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v4
-
-    - if: runner.os == 'Windows'
-      uses: microsoft/setup-msbuild@v2
+    - uses: rlalik/setup-cpp-compiler@v1.2
+      with:
+        compiler: gcc-latest
 
     - name: Build
       run: bash ./src/build.sh
