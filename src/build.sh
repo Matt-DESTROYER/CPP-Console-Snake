@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# create a temporary directory
-mkdir ./temp
-cd ./temp
-
 # compile the project
 if [[ $RUNNER_OS != "Linux" && $RUNNER_OS != "Windows" ]]; then
 	echo "Unsupported OS: $RUNNER_OS"
@@ -27,7 +23,4 @@ git pull
 rm -rf ../build/$RUNNER_OS/$ARCH/
 mkdir -p ../build/$RUNNER_OS/$ARCH/
 
-g++ main.cpp -O2 -o main
-
-[[ -f ./main ]] && cp -f ./main ../build/$RUNNER_OS-$ARCH/$PROJECT_NAME
-[[ -f ./main.exe ]] && cp -f ./Debug/main.exe ../build/$RUNNER_OS-$ARCH/$PROJECT_NAME.exe
+g++ ./main.cpp -O2 -o ../build/$RUNNER_OS/$ARCH/$PROJECT_NAME
