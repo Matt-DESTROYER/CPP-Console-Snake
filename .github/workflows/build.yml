@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./src
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -25,7 +30,7 @@ jobs:
         compiler: gcc-latest
 
     - name: Build
-      run: bash ./src/build.sh
+      run: bash ./build.sh
       env:
         PROJECT_NAME: CPP-Console-Snake
 
@@ -38,4 +43,3 @@ jobs:
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      shell: bash
