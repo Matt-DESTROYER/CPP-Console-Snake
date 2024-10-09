@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: Matt-DESTROYER/Setup-GCC@9235718c26b1d6255ce6cf2763dfa0eeea21755a
+    - uses: Matt-DESTROYER/Setup-GCC@e3f2abccf624435ea371f0895502fd70cb97e642
       with:
         compiler: gcc-latest
 
