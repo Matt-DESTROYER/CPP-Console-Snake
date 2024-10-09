@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: rlalik/setup-cpp-compiler@v1.2
+    - uses: Matt-DESTROYER/Setup-GCC@8879443bd847823d5b661b45d08953fb16b696d9
       with:
         compiler: gcc-latest
 
