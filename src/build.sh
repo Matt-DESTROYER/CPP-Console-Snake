@@ -12,7 +12,7 @@ if [[ $ARCH == x86_64* ]]; then
 	ARCH="x64"
 elif [[ $ARCH == i*86 ]]; then
 	ARCH="x32"
-elif [[ $arch == arm* ]]; then
+elif [[ $ARCH == arm* ]]; then
 	ARCH="arm"
 fi
 
