@@ -7,7 +7,7 @@ if [[ $RUNNER_OS != "Linux" && $RUNNER_OS != "Windows" ]]; then
 fi
 
 # detect architecture
-if [[ -z "${ARCH}" ]]; then
+if [[ -z $ARCH ]]; then
 	ARCH=$(uname -m)
 	if [[ $ARCH == "x64" || $ARCH == "x86_64" || $ARCH == "amd64" ]]; then
 		ARCH="x64"
