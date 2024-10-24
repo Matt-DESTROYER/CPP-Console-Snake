@@ -31,11 +31,11 @@ fi
 # extra compile flags
 EXTRA_FLAGS=""
 if [[ $RUNNER_OS == "macOS" ]]; then
-	EXTRA_FLAGS+="-std=c++17"
+	EXTRA_FLAGS+="-std=c++17 -lcurses"
 fi
 
 # compile
 rm -rf ../build/$RUNNER_OS/$ARCH/
 mkdir -p ../build/$RUNNER_OS/$ARCH/
 
-g++ -O2 $EXTRA_FLAGS -lcurses -o ../build/$RUNNER_OS/$ARCH/$PROJECT_NAME ./main.cpp
+g++ -O2 $EXTRA_FLAGS -o ../build/$RUNNER_OS/$ARCH/$PROJECT_NAME ./main.cpp
