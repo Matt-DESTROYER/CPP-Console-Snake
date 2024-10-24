@@ -24,8 +24,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: Matt-DESTROYER/Use-GCC@v1.1
-      with:
-        compiler: gcc-latest
 
     - name: Build
       run: bash ./build.sh
