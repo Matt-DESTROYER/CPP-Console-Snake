@@ -19,7 +19,6 @@ jobs:
 
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        arch: [x32, x64, arm, arm64]
 
     steps:
     - uses: actions/checkout@v4
