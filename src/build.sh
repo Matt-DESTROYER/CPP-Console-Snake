@@ -1,9 +1,17 @@
 #!/bin/bash
 
-# compile the project
-if [[ $RUNNER_OS != "Linux" && $RUNNER_OS != "Windows" ]]; then
-	echo "Unsupported OS: $RUNNER_OS"
-	exit 1
+# detect OS
+if [[ -z $RUNNER_OS  ]]; then
+	if [[ $OSTYPE == "linux" || $OSTYPE == "linux-gnu" ]]; then
+ 		RUNNER_OS="Linux"
+	elif [[ $OSTYPE == "msys" || $OSTYPE == "cygwin" ]]; then
+   		RUNNER_OS="Windows"
+	elif [[ $OSTYPE == "darwin" ]]; then
+ 		RUNNER_OS="macOS"
+	else
+        echo "Failed to autodetect OS..."
+        exit 1
+	fi
 fi
 
 # detect architecture
