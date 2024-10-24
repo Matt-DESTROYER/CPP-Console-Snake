@@ -28,11 +28,8 @@ if [[ -z $ARCH ]]; then
 	fi
 fi
 
-# just in case
-git pull
-
 # compile
 rm -rf ../build/$RUNNER_OS/$ARCH/
 mkdir -p ../build/$RUNNER_OS/$ARCH/
 
-g++ ./main.cpp -O2 -o ../build/$RUNNER_OS/$ARCH/$PROJECT_NAME
+g++ -std=c++17 -O2 -o ../build/$RUNNER_OS/$ARCH/$PROJECT_NAME ./main.cpp
