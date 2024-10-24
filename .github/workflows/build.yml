@@ -24,6 +24,9 @@ jobs:
     - uses: actions/checkout@v4
     - uses: Matt-DESTROYER/Use-GCC@v1.2
 
+    - name: Pull
+      run: git pull
+
     - name: Build
       run: bash ./build.sh
       env:
