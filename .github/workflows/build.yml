@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: Matt-DESTROYER/Use-GCC@v1.1
+    - uses: Matt-DESTROYER/Use-GCC@v1.2
 
     - name: Build
       run: bash ./build.sh
