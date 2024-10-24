@@ -28,8 +28,14 @@ if [[ -z $ARCH ]]; then
 	fi
 fi
 
+# extra compile flags
+EXTRA_FLAGS=""
+if [[ $RUNNER_OS == "macOS" ]]; then
+	EXTRA_FLAGS+="-lcurses"
+fi
+
 # compile
 rm -rf ../build/$RUNNER_OS/$ARCH/
 mkdir -p ../build/$RUNNER_OS/$ARCH/
 
-g++ -std=c++17 -O2 -o ../build/$RUNNER_OS/$ARCH/$PROJECT_NAME ./main.cpp
+g++ -std=c++17 -O2 $EXTRA_FLAGS -o ../build/$RUNNER_OS/$ARCH/$PROJECT_NAME ./main.cpp
